@@ -90,7 +90,8 @@ int main(void) {
 			break;
 		case 6:
 			std::cout << "\nYou selected [6] SeeNext. | \n";
-			inventory.SeeNext()->getValue().asciiART();
+			hashtable.setTheCurrentSpotForRicky(hashtable.getTheCurrentSpotForRicky() + 1);
+			hashtable.getItem(;
 			break;
 		case 7:
 			std::cout << "\nYou selected [7] SeePrev. | \n";
