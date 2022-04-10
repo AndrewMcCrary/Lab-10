@@ -10,7 +10,7 @@ public:
 	DoubleLL(Node<T>* start);
 	~DoubleLL();
 	void AddItem(T* var);
-	T* GetItem(T var);
+	std::tuple<T*, unsigned int> GetItem(T var);
 	bool IsInList(int sku);
 	bool IsInList(T var);
 	bool IsEmpty();
@@ -69,12 +69,17 @@ inline void DoubleLL<T>::AddItem(T* var)
 }
 
 template<typename T>
-inline T* DoubleLL<T>::GetItem(T var)
+inline std::tuple<T*, unsigned int> DoubleLL<T>::GetItem(T var)
 {
 	Node<T>* temp = this->head;
+	int comparisons = 0;
+
 	while (temp != nullptr) {
-		if (*(temp->data) == var)
-			return temp->data;
+		comparisons++;
+		if (*(temp->data) == var) {
+
+			return { temp->data, comparisons };
+		}
 		temp = temp->Next;
 	}
 	return nullptr;

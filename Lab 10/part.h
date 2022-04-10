@@ -8,7 +8,7 @@ class Part
 {
 public:
 	Part();
-	Part(int SKU, std::string desc, double price, std::string UOM, int QOH = 0, int LT = 2500);
+	Part(int SKU, std::string desc = "Description", double price = 9.99, std::string UOM = "UOM", int QOH = 0, int LT = 2500);
 	std::string getPartInfo();
 	double getPrice();
 	int getSKU();
@@ -552,7 +552,7 @@ inline void Part::asciiART()
             if (input[i] == '?')
                 std::cout << "   ) | ";
         }
-        std::cout << endl;
+        std::cout << std::endl;
         //loop will print fourth layer
         for (int i = 0; i < input.size(); i++)
         {

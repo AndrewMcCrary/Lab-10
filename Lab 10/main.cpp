@@ -3,9 +3,11 @@
 #include "part.h"
 #include <string>
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
+/*
 int main(void) {
 
 	table<Part> hashtable = table<Part>();
@@ -121,6 +123,28 @@ int main(void) {
 		std::cin >> connectionTerminated;
 	
 	}	
+
+	return 0;
+}*/
+
+
+int main(void) {
+	vector<Part*> parts;
+
+	srand(time(NULL));
+
+	for (int i = 0; i < 650; i++) {
+		parts.push_back(new Part((rand() % 1000) + 1));
+	}
+	
+	for (auto i : parts) {
+
+	}
+
+
+
+	for (auto i : parts)
+		delete i;
 
 	return 0;
 }

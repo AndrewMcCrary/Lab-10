@@ -40,6 +40,8 @@ inline T chainedTable<T>::removeItem(T item) {
 
 template<class T>
 inline T* chainedTable<T>::getItem(T item) {
+	std::tuple<T*, int> val = this->itemArr.GetItem(item);
+	this->comparisons = val[1];
 	return this->itemArr.GetItem(item);
 }
 
