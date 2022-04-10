@@ -13,7 +13,7 @@ int main(void) {
 	bool connectionTerminated = false;
 	while (!connectionTerminated) {
 		std::cout << "Function Testing Menu\n\n [1] AddItem\n [2] GetItem (removes from list)\n [3] IsInList\n [4] IsEmpty\n" <<
-			" [5] Size\n [6] SeeNext\n [7] SeePrev\n [8] SeeAt\n [9] Reset\n[10] Destructor\n[11] ASCII Art\n\n";
+			" [5] Size\n [6] SeeNext\n [7] SeePrev\n [8] SeeAt\n [9] Reset\n[10] ASCII Art\n\n";
 		int choice = 0;
 		std::cin >> choice;
 		bool correct = true;
@@ -111,10 +111,6 @@ int main(void) {
 			}
 			break;
 		case 10:
-			std::cout << "\nYou selected [10] Destructor. | \n\n";
-			inventory.~Dubley();
-			break;
-		case 11:
 			std::cout << "\nYou selected [11] ASCII Art.\n\n";
 			inventory.printList();
 		default:
