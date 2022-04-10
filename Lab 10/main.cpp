@@ -42,8 +42,8 @@ int main(void) {
 				std::cin >> correct;
 
 				if (!correct) { 
-					Part party = Part(sku, description, price, units, quantity, leadTime); 
-					hashtable.addItem(&party);
+					Part* party = new Part(sku, description, price, units, quantity, leadTime); 
+					hashtable.addItem(party);
 				}
 			}
 			break;
@@ -61,6 +61,7 @@ int main(void) {
 					}
 					else {
 						hashtable.getItem(Part(sku, "0", 0, "0"))->asciiART();
+						hashtable.removeItem(*(hashtable.getItem(Part(sku, "0", 0, "0"))));
 					}
 				}
 			}

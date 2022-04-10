@@ -20,8 +20,8 @@ public:
 	unsigned int getLength() { return this->length; }
 	unsigned int getTheNumberOfThingsForRicky() { return this->theNumberOfThings; }
 	unsigned int getTheCurrentSpotForRicky() { return this->currentSpot; }
-	unsigned int setTheCurrentSpotForRicky(unsigned int newVal) { currentSpot = newVal; }
-	T* getTheCurrentItemForRicky() { return itemArr[currentSpot]->value; }
+	void setTheCurrentSpotForRicky(unsigned int newVal) { currentSpot = newVal; }
+	T* getTheCurrentItemForRicky() { return itemArr[currentSpot].value; }
 };
 
 template<class T>
@@ -54,11 +54,11 @@ inline void table<T>::addItem(T* item) {
 		false
 	};
 
-	if (itemArr[index] = (node<T>)NULL) {
+	if (itemArr[index] == NULL) {
 		itemArr[index] = inval;
 	}
 	else {
-		while (itemArr[index] != (node<T>)NULL) {
+		while (itemArr[index] != node<T>(NULL)) {
 			index = (index++) % this->length;
 		}
 		itemArr[index] = inval;
@@ -69,7 +69,7 @@ template<class T>
 inline T* table<T>::removeItem(T item)
 {
 	int spot = hash(item);
-    while (itemArr[spot] != (node<T>)NULL && *(itemArr[spot].value) != item) {
+    while (itemArr[spot] != NULL && itemArr[spot] != item) {
 		spot = (spot + 1) % this->length;
     }
         //check for not found
@@ -84,8 +84,8 @@ inline T* table<T>::getItem(T item)
     while (itemArr[spot] != NULL && itemArr[spot] != item) {
         spot = (spot + 1) % this->length;
     }
-	if (itemArr[spot] == nullptr)
+	if (itemArr[spot] == NULL)
 		return nullptr;
-	else return itemArr[spot]; //check for not found
+	else return itemArr[spot].value; //check for not found
 }
 
