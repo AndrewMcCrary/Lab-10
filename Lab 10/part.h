@@ -36,7 +36,7 @@ Part::Part()
 {
 }
 
-inline Part::Part(int SKU, std::string desc, double price, std::string UOM, int QOH = 0, int LT = 5000)
+inline Part::Part(int SKU, std::string desc, double price, std::string UOM, int QOH, int LT)
 {
 	this->SKU = SKU;
 	this->description = desc;
@@ -695,7 +695,7 @@ inline void Part::asciiART()
             if (input[i] == '?')
                 std::cout << "  / /  ";
         }
-        std::cout << endl;
+        std::cout << std::endl;
         //loop will print fifth layer
         for (int i = 0; i < input.size(); i++)
         {
@@ -838,7 +838,7 @@ inline void Part::asciiART()
             if (input[i] == '?')
                 std::cout << " |_|   ";
         }
-        std::cout << endl;
+        std::cout << std::endl;
         //loop will print sixth layer
         for (int i = 0; i < input.size(); i++)
         {
@@ -981,7 +981,7 @@ inline void Part::asciiART()
             if (input[i] == '?')
                 std::cout << " (_)   ";
         }
-        std::cout << endl;
+        std::cout << std::endl;
         x++;
     }
 }

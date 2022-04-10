@@ -21,11 +21,11 @@ inline Node<T>::Node(T _data)
 template<typename T>
 inline Node<T>::~Node()
 {
+	delete this->data;
+
 	if (this->next)
 		this->next->prev = this->prev;
 
 	if (this->prev)
 		this->prev->next = this->next;
-
-	delete this;
 }

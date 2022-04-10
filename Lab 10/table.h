@@ -7,10 +7,11 @@ class table
 {
 private:
 	unsigned int length = 0;
-	int hash(std::string str);
 	unsigned int theNumberOfThings = 0;
 	int currentSpot = 0;
 	node<T>* itemArr;
+protected:
+	int hash(std::string str);
 public:
 	table(unsigned int length = 100);
 	~table();

@@ -20,6 +20,7 @@ public:
 	T* SeePrev();
 	T* SeeAt(int var);
 	void Reset();
+	T RemoveItem(T var);
 private:
 	Node<T>* current = nullptr;
 	Node<T>* head = nullptr;
@@ -163,4 +164,20 @@ template<typename T>
 inline void DoubleLL<T>::Reset()
 {
 	this->current = this->head;
+}
+
+template<typename T>
+inline T DoubleLL<T>::RemoveItem(T var) {
+	Node<T>* temp = this->head;
+
+	while (temp)
+		if (*(temp->data) == var) {
+			T ret = *(temp->data);
+			delete temp;
+			return ret;
+		}
+		else 
+			temp = temp->next;
+
+	return (T)NULL;
 }
