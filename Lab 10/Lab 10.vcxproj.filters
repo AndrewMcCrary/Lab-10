@@ -35,5 +35,8 @@
     <ClInclude Include="LLNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="chainedTable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
