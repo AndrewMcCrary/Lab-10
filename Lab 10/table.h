@@ -81,7 +81,6 @@ inline T table<T>::removeItem(T item)
 template<class T>
 inline T* table<T>::getItem(T item)
 {
-	this->comparisons = 0;
 	int spot = hash(item);
     while (itemArr[spot] != NULL && itemArr[spot] != item) {
 		this->comparisons++;

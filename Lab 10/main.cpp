@@ -4,10 +4,10 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include "chainedTable.h"
 
 using namespace std;
 
-/*
 int main(void) {
 
 	table<Part> hashtable = table<Part>();
@@ -125,10 +125,10 @@ int main(void) {
 	}	
 
 	return 0;
-}*/
+}
 
 
-int main(void) {
+int fmain(void) {
 	vector<Part*> parts;
 
 	srand(time(NULL));
@@ -137,10 +137,38 @@ int main(void) {
 		parts.push_back(new Part((rand() % 1000) + 1));
 	}
 	
-	for (auto i : parts) {
 
+	table<Part> t1;
+	chainedTable<Part> ct1;
+	for (int i = 0; i < 50; i++) {
+		t1.addItem(parts[i]);
+		ct1.addItem(parts[i]);
 	}
+	cout << t1.comparisons << "	" << ct1.comparisons << endl;
 
+	table<Part> t2;
+	chainedTable<Part> ct2;
+	for (int i = 0; i < 150; i++) {
+		t1.addItem(parts[i]);
+		ct1.addItem(parts[i]);
+	}
+	cout << t1.comparisons << "	" << ct1.comparisons << endl;
+
+	table<Part> t3;
+	chainedTable<Part> ct3;
+	for (int i = 0; i < 200; i++) {
+		t1.addItem(parts[i]);
+		ct1.addItem(parts[i]);
+	}
+	cout << t1.comparisons << "	" << ct1.comparisons << endl;
+
+	table<Part> t4;
+	chainedTable<Part> ct4;
+	for (int i = 0; i < 250; i++) {
+		t1.addItem(parts[i]);
+		ct1.addItem(parts[i]);
+	}
+	cout << t1.comparisons << "	" << ct1.comparisons << endl;
 
 
 	for (auto i : parts)
