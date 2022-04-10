@@ -16,7 +16,7 @@ public:
 	table(unsigned int length = 100);
 	~table();
 	void addItem(T* item);
-	T* removeItem(T item);
+	T removeItem(T item);
 	T* getItem(T item);
 	unsigned int getLength() { return this->length; }
 	unsigned int getTheNumberOfThingsForRicky() { return this->theNumberOfThings; }
@@ -66,7 +66,7 @@ inline void table<T>::addItem(T* item) {
 }
 
 template<class T>
-inline T* table<T>::removeItem(T item)
+inline T table<T>::removeItem(T item)
 {
 	int spot = hash(item);
     while (itemArr[spot] != (node<T>)NULL && *(itemArr[spot].value) != item) {
@@ -74,7 +74,7 @@ inline T* table<T>::removeItem(T item)
     }
         //check for not found
     itemArr[spot].deleted = true;
-    return itemArr[spot].value;
+    return *(itemArr[spot].value);
 }
 
 template<class T>

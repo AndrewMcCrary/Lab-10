@@ -11,11 +11,11 @@ public:
 	unsigned int getLength() { return this->itemArr.Size(); }
 	unsigned int getTheNumberOfThingsForRicky() { return this->itemArr.Size(); }
 	void addItem(T* item);
-	T* removeItem(T item);
+	T removeItem(T item);
 	T* getItem(T item);
 
 private:
-	DoubleLL itemArr;
+	DoubleLL<T> itemArr;
 };
 
 template<class T>
@@ -34,13 +34,13 @@ inline void chainedTable<T>::addItem(T* item) {
 }
 
 template<class T>
-inline T* chainedTable<T>::removeItem(T item) {
-	return nullptr;
+inline T chainedTable<T>::removeItem(T item) {
+	return this->itemArr.RemoveItem(item);
 }
 
 template<class T>
 inline T* chainedTable<T>::getItem(T item) {
-	return nullptr;
+	return this->itemArr.GetItem(item);
 }
 
 

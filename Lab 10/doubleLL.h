@@ -11,7 +11,6 @@ public:
 	~DoubleLL();
 	void AddItem(T* var);
 	T* GetItem(T var);
-	Part* GetItem(int SKU);
 	bool IsInList(int sku);
 	bool IsInList(T var);
 	bool IsEmpty();
@@ -77,17 +76,6 @@ inline T* DoubleLL<T>::GetItem(T var)
 		if (*(temp->data) == var)
 			return temp->data;
 		temp = temp->Next;
-	}
-	return nullptr;
-}
-
-inline Part* DoubleLL<Part>::GetItem(int SKU)
-{
-	Node<Part>* temp = this->head;
-	while (temp != nullptr) {
-		if (temp->data->getSKU() == SKU)
-			return temp->data;
-		temp = temp->next;
 	}
 	return nullptr;
 }
