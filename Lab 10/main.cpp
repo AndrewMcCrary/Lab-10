@@ -3,6 +3,8 @@
 #include "part.h"
 #include <string>
 #include <iostream>
+#include <vector>
+#include "chainedTable.h"
 
 using namespace std;
 
@@ -125,6 +127,56 @@ int main(void) {
 		std::cin >> connectionTerminated;
 	
 	}	
+
+	return 0;
+}
+
+
+int fmain(void) {
+	vector<Part*> parts;
+
+	srand(time(NULL));
+
+	for (int i = 0; i < 650; i++) {
+		parts.push_back(new Part((rand() % 1000) + 1));
+	}
+	
+
+	table<Part> t1;
+	chainedTable<Part> ct1;
+	for (int i = 0; i < 50; i++) {
+		t1.addItem(parts[i]);
+		ct1.addItem(parts[i]);
+	}
+	cout << t1.comparisons << "	" << ct1.comparisons << endl;
+
+	table<Part> t2;
+	chainedTable<Part> ct2;
+	for (int i = 0; i < 150; i++) {
+		t1.addItem(parts[i]);
+		ct1.addItem(parts[i]);
+	}
+	cout << t1.comparisons << "	" << ct1.comparisons << endl;
+
+	table<Part> t3;
+	chainedTable<Part> ct3;
+	for (int i = 0; i < 200; i++) {
+		t1.addItem(parts[i]);
+		ct1.addItem(parts[i]);
+	}
+	cout << t1.comparisons << "	" << ct1.comparisons << endl;
+
+	table<Part> t4;
+	chainedTable<Part> ct4;
+	for (int i = 0; i < 250; i++) {
+		t1.addItem(parts[i]);
+		ct1.addItem(parts[i]);
+	}
+	cout << t1.comparisons << "	" << ct1.comparisons << endl;
+
+
+	for (auto i : parts)
+		delete i;
 
 	return 0;
 }

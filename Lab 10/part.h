@@ -8,7 +8,7 @@ class Part
 {
 public:
 	Part();
-	Part(int SKU, std::string desc, double price, std::string UOM, int QOH = 0, int LT = 2500);
+	Part(int SKU, std::string desc = "Description", double price = 9.99, std::string UOM = "UOM", int QOH = 0, int LT = 2500);
 	std::string getPartInfo();
 	double getPrice();
 	int getSKU();

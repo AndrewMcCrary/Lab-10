@@ -143,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="doubleLL.h" />
+    <ClInclude Include="chainedTable.h" />
     <ClInclude Include="LLNode.h" />
     <ClInclude Include="node.h" />
     <ClInclude Include="part.h" />

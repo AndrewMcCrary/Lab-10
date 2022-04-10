@@ -6,11 +6,12 @@ template<class T>
 class table
 {
 private:
-	unsigned int length = 0;
-	int hash(std::string str);
+	unsigned const int length = 0;
 	unsigned int theNumberOfThings = 0;
 	int currentSpot = 0;
 	node<T>** itemArr;
+protected:
+	int hash(std::string str);
 public:
 	table(unsigned int length = 100);
 	~table();
@@ -21,7 +22,7 @@ public:
 	unsigned int getTheNumberOfThingsForRicky() { return this->theNumberOfThings; }
 	unsigned int getTheCurrentSpotForRicky() { return this->currentSpot; }
 	void setTheCurrentSpotForRicky(unsigned int newVal) { currentSpot = newVal; }
-	T* getTheCurrentItemForRicky() { return itemArr[currentSpot]->value; }
+	int comparisons = 0;
 };
 
 template<class T>
@@ -42,12 +43,12 @@ inline table<T>::table(unsigned int length) {
 
 template<class T>
 inline table<T>::~table() {
-	delete this->itemArr;
+	delete[] this->itemArr;
 }
 
 template<class T>
 inline void table<T>::addItem(T* item) {
-	int index = hash(std::string(*item));
+	int index = hash(std::string(*item)) % this->length;
 
 	node<T>* inval = new node<T>{
 		item,
@@ -82,8 +83,11 @@ inline T* table<T>::getItem(T item)
 {
 	int spot = hash(item);
     while (itemArr[spot] != nullptr && *(itemArr[spot]->value) != item) {
+		this->comparisons++;
         spot = (spot + 1) % this->length;
     }
+
+	this->comparisons++;
 	if (itemArr[spot] == nullptr)
 		return nullptr;
 	else return itemArr[spot]->value; //check for not found

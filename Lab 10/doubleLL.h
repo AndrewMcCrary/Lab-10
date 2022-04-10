@@ -10,8 +10,7 @@ public:
 	DoubleLL(Node<T>* start);
 	~DoubleLL();
 	void AddItem(T* var);
-	T* GetItem(T var);
-	Part* GetItem(int SKU);
+	std::tuple<T*, unsigned int> GetItem(T var);
 	bool IsInList(int sku);
 	bool IsInList(T var);
 	bool IsEmpty();
@@ -20,6 +19,7 @@ public:
 	T* SeePrev();
 	T* SeeAt(int var);
 	void Reset();
+	T RemoveItem(T var);
 private:
 	Node<T>* current = nullptr;
 	Node<T>* head = nullptr;
@@ -69,24 +69,18 @@ inline void DoubleLL<T>::AddItem(T* var)
 }
 
 template<typename T>
-inline T* DoubleLL<T>::GetItem(T var)
+inline std::tuple<T*, unsigned int> DoubleLL<T>::GetItem(T var)
 {
 	Node<T>* temp = this->head;
-	while (temp != nullptr) {
-		if (*(temp->data) == var)
-			return temp->data;
-		temp = temp->Next;
-	}
-	return nullptr;
-}
+	int comparisons = 0;
 
-inline Part* DoubleLL<Part>::GetItem(int SKU)
-{
-	Node<Part>* temp = this->head;
 	while (temp != nullptr) {
-		if (temp->data->getSKU() == SKU)
-			return temp->data;
-		temp = temp->next;
+		comparisons++;
+		if (*(temp->data) == var) {
+
+			return { temp->data, comparisons };
+		}
+		temp = temp->Next;
 	}
 	return nullptr;
 }
@@ -163,4 +157,20 @@ template<typename T>
 inline void DoubleLL<T>::Reset()
 {
 	this->current = this->head;
+}
+
+template<typename T>
+inline T DoubleLL<T>::RemoveItem(T var) {
+	Node<T>* temp = this->head;
+
+	while (temp)
+		if (*(temp->data) == var) {
+			T ret = *(temp->data);
+			delete temp;
+			return ret;
+		}
+		else 
+			temp = temp->next;
+
+	return (T)NULL;
 }
