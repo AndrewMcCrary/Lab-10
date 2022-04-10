@@ -1,7 +1,8 @@
 #pragma once
 
 template<class T>
-struct node {
+class node {
+public:
 	T* value;
 	bool deleted;
 };
