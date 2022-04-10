@@ -21,6 +21,7 @@ public:
 	unsigned int getTheNumberOfThingsForRicky() { return this->theNumberOfThings; }
 	unsigned int getTheCurrentSpotForRicky() { return this->currentSpot; }
 	unsigned int setTheCurrentSpotForRicky(unsigned int newVal) { currentSpot = newVal; }
+	T* getTheCurrentItemForRicky() {return itemArr[currentSpot] }
 };
 
 template<class T>

@@ -56,11 +56,11 @@ int main(void) {
 				std::cout << "\nYou entered: " << sku << ". Is this correct? [0]: yes / [1]: no | ";
 				std::cin >> correct;
 				if (!correct) { 
-					if (hashtable.getItem(sku) == nullptr) {
+					if (hashtable.getItem(Part(sku, 0, 0, 0)) == nullptr) {
 						std::cout << "\nItem may not be in hash table\n";
 					}
 					else {
-						hashtable.getItem(sku).asciiART();
+						hashtable.getItem(Part(sku, 0, 0, 0)).asciiART();
 					}
 				}
 			}
@@ -69,7 +69,7 @@ int main(void) {
 			int sku;
 			std::cout << "\nYou selected [3] IsInList. Please provide a Stock Keeping Number (SKU): ";
 			std::cin >> sku;
-			if (hashtable.getItem(sku) == nullptr) {
+			if (hashtable.getItem(Part(sku, 0, 0, 0)) == nullptr) {
 				std::cout << sku << " is NOT in list." << endl;
 			}
 			else {
