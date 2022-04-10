@@ -13,7 +13,7 @@ int main(void) {
 	bool connectionTerminated = false;
 	while (!connectionTerminated) {
 		std::cout << "Function Testing Menu\n\n [1] AddItem\n [2] GetItem (removes from list)\n [3] IsInList\n [4] IsEmpty\n" <<
-			" [5] Size\n [6] SeeNext\n [7] SeePrev\n [8] SeeAt\n [9] Reset\n[10] ASCII Art\n\n";
+			" [5] Size\n [6] SeeNext\n [7] SeePrev\n [8] SeeAt\n [9] Reset\n\n";
 		int choice = 0;
 		std::cin >> choice;
 		bool correct = true;
@@ -56,11 +56,11 @@ int main(void) {
 				std::cout << "\nYou entered: " << sku << ". Is this correct? [0]: yes / [1]: no | ";
 				std::cin >> correct;
 				if (!correct) { 
-					if (hashtable.getItem(Part(sku, 0, 0, 0)) == nullptr) {
+					if (hashtable.getItem(Part(sku, "0", 0, "0")) == nullptr) {
 						std::cout << "\nItem may not be in hash table\n";
 					}
 					else {
-						hashtable.getItem(Part(sku, 0, 0, 0)).asciiART();
+						hashtable.getItem(Part(sku, "0", 0, "0"))->asciiART();
 					}
 				}
 			}
@@ -91,28 +91,31 @@ int main(void) {
 		case 6:
 			std::cout << "\nYou selected [6] SeeNext. | \n";
 			hashtable.setTheCurrentSpotForRicky(hashtable.getTheCurrentSpotForRicky() + 1);
-			hashtable.getItem(;
+			hashtable.getTheCurrentItemForRicky()->asciiART();
 			break;
 		case 7:
 			std::cout << "\nYou selected [7] SeePrev. | \n";
-			inventory.SeePrev()->getValue().asciiART();
+			hashtable.setTheCurrentSpotForRicky(hashtable.getTheCurrentSpotForRicky() + 1);
+			hashtable.getTheCurrentItemForRicky()->asciiART();
 			break;
 		case 8:
 			int viewIndex;
 			std::cout << "\nYou selected [8] SeeAt. Please provide an index to view: ";
 			std::cin >> viewIndex;
-			inventory.SeeAt(viewIndex)->getValue().asciiART();
+			hashtable.setTheCurrentSpotForRicky(viewIndex);
+			hashtable.getTheCurrentItemForRicky()->asciiART();
 			break;
 		case 9:
 			while (correct) {
 				std::cout << "\nYou selected [9] Reset. Are you sure? [0]: yes / [1]: no";
 				std::cin >> correct;
-				if (!correct) { inventory.Reset(); }
+				if (!correct) { 
+					table<Part> temp = hashtable;
+					hashtable = table<Part>();
+					delete& temp;
+				}
 			}
 			break;
-		case 10:
-			std::cout << "\nYou selected [11] ASCII Art.\n\n";
-			inventory.printList();
 		default:
 			continue;
 		};
