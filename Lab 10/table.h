@@ -10,7 +10,7 @@ private:
 	int hash(std::string str);
 	unsigned int theNumberOfThings = 0;
 	int currentSpot = 0;
-	node<T>* itemArr;
+	node<T>** itemArr;
 public:
 	table(unsigned int length = 100);
 	~table();
@@ -21,7 +21,7 @@ public:
 	unsigned int getTheNumberOfThingsForRicky() { return this->theNumberOfThings; }
 	unsigned int getTheCurrentSpotForRicky() { return this->currentSpot; }
 	void setTheCurrentSpotForRicky(unsigned int newVal) { currentSpot = newVal; }
-	T* getTheCurrentItemForRicky() { return itemArr[currentSpot].value; }
+	T* getTheCurrentItemForRicky() { return itemArr[currentSpot]->value; }
 };
 
 template<class T>
@@ -36,7 +36,7 @@ inline int table<T>::hash(std::string str)
 
 template<class T>
 inline table<T>::table(unsigned int length) {
-	this->itemArr = new *node<T>[length];
+	this->itemArr = new node<T>*[length];
 	this->length = length;
 }
 
@@ -69,19 +69,19 @@ template<class T>
 inline T table<T>::removeItem(T item)
 {
 	int spot = hash(item);
-    while (itemArr[spot] != nullptr && *(itemArr[spot]) != item) {
+    while (itemArr[spot] != nullptr && *(itemArr[spot]->value) != item) {
 		spot = (spot + 1) % this->length;
     }
         //check for not found
     itemArr[spot].deleted = true;
-    return itemArr[spot]->value;
+    return *(itemArr[spot]->value);
 }
 
 template<class T>
 inline T* table<T>::getItem(T item)
 {
 	int spot = hash(item);
-    while (itemArr[spot] != nullptr && *(itemArr[spot]) != item) {
+    while (itemArr[spot] != nullptr && *(itemArr[spot]->value) != item) {
         spot = (spot + 1) % this->length;
     }
 	if (itemArr[spot] == nullptr)
