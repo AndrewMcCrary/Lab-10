@@ -10,17 +10,16 @@ public:
 	~chainedTable();
 	unsigned int getLength() { return this->itemArr.Size(); }
 	unsigned int getTheNumberOfThingsForRicky() { return this->itemArr.Size(); }
-	void addItem(T* item);
-	T removeItem(T item);
-	T* getItem(T item);
+	void insert(T item);
+	T remove(T item);
+	T* get(T item);
 
 private:
-	DoubleLL<T> itemArr;
+	DoubleLL<T>* itemArr = new DoubleLL<T>();
 };
 
 template<class T>
 chainedTable<T>::chainedTable() {
-
 }
 
 template<class T>
@@ -29,20 +28,20 @@ chainedTable<T>::~chainedTable() {
 }
 
 template<class T>
-inline void chainedTable<T>::addItem(T* item) {
-	itemArr.AddItem(item);
+inline void chainedTable<T>::insert(T item) {
+	this->itemArr->AddItem(item);
 }
 
 template<class T>
-inline T chainedTable<T>::removeItem(T item) {
-	return this->itemArr.RemoveItem(item);
+inline T chainedTable<T>::remove(T item) {
+	return this->itemArr->RemoveItem(item);
 }
 
 template<class T>
-inline T* chainedTable<T>::getItem(T item) {
-	std::tuple<T*, int> val = this->itemArr.GetItem(item);
-	this->comparisons += val[1];
-	return this->itemArr.GetItem(item);
+inline T* chainedTable<T>::get(T item) {
+	std::pair<T*, unsigned int> val = this->itemArr->get(item);
+	this->comparisons += val.second;
+	return val.first;
 }
 
 

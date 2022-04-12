@@ -9,13 +9,15 @@ public:
 	Node* next = nullptr;
 	Node* prev = nullptr;
 	T* data;
+	bool operator==(const Node& n) { return *(this->data)== *(n.data); }
+	bool operator>(const Node& n) { return *(this->data)> *(n.data); }
+	bool operator<(const Node& n) { return *(this->data) < *(n.data); }
 private:
 };
 
 template<typename T>
-inline Node<T>::Node(T _data)
-{
-	this->data = _data;
+inline Node<T>::Node(T _data) {
+	this->data = new T(_data);
 }
 
 template<typename T>

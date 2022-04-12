@@ -24,7 +24,7 @@ public:
 	void asciiART();
 
 private:
-	int SKU;
+    int SKU = 0;
 	std::string description;
 	double price;
 	std::string UOM;

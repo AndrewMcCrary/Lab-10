@@ -23,9 +23,6 @@
     <ClInclude Include="table.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="node.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="part.h">
       <Filter>Header Files</Filter>
     </ClInclude>

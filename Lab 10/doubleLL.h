@@ -9,8 +9,8 @@ public:
 	DoubleLL() {};
 	DoubleLL(Node<T>* start);
 	~DoubleLL();
-	void AddItem(T* var);
-	std::tuple<T*, unsigned int> GetItem(T var);
+	void AddItem(T var);
+	std::pair<T*, unsigned int> get(T var);
 	bool IsInList(int sku);
 	bool IsInList(T var);
 	bool IsEmpty();
@@ -36,40 +36,42 @@ template<typename T>
 inline DoubleLL<T>::~DoubleLL()
 {
 	while (this->head != nullptr) {
-		this->current = this->head->Next;
+		this->current = this->head->next;
 		delete this->head;
 		this->head = this->current;
 	}
 }
 
 template<typename T>
-inline void DoubleLL<T>::AddItem(T* var)
+inline void DoubleLL<T>::AddItem(T var)
 {
+	Node<T>* in = new Node<T>(var);
 	if (this->IsEmpty())
-		this->head = new Node<T>(var);
-	else if (this->head->data > var->data) {
-		this->head->Prev = var;
-		var->Next = this->head;
-		this->head = var;
+		this->head = in;
+	else if (this->head->operator>(*in)) {
+		in->next = this->head;
+		this->head->prev = in;
+		this->head = in;
 	}
 	else {
-		Node<T>* temp = this->head;
-		while (temp != nullptr) {
-			if (temp->getValue() > var->getValue()) {
-				var->Prev = temp->Prev;
-				var->Next = temp;
-				temp->Prev->Next = var;
-				temp->Prev = var;
-				return;
-			}
-
-			temp = temp->Next;
+		this->Reset();
+		while (this->current->next && this->current->next->operator<(*in)) {
+			this->current = this->current->next;
 		}
+		
+		in->prev = current;
+		if (current->next) {
+			in->next = current->next;
+			current->next->prev = in;
+		}
+		current->next = in;
 	}
+
+	this->Reset();
 }
 
 template<typename T>
-inline std::tuple<T*, unsigned int> DoubleLL<T>::GetItem(T var)
+inline std::pair<T*, unsigned int> DoubleLL<T>::get(T var)
 {
 	Node<T>* temp = this->head;
 	int comparisons = 0;
@@ -80,9 +82,9 @@ inline std::tuple<T*, unsigned int> DoubleLL<T>::GetItem(T var)
 
 			return { temp->data, comparisons };
 		}
-		temp = temp->Next;
+		temp = temp->next;
 	}
-	return nullptr;
+	return {nullptr, 0};
 }
 
 template<typename T>
@@ -154,8 +156,7 @@ inline T* DoubleLL<T>::SeeAt(int var)
 }
 
 template<typename T>
-inline void DoubleLL<T>::Reset()
-{
+inline void DoubleLL<T>::Reset() {
 	this->current = this->head;
 }
 

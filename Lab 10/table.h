@@ -1,23 +1,23 @@
 #pragma once
 #include <string>
-#include "node.h"
 
 template<class T>
 class table
 {
 private:
-	unsigned const int length = 0;
+	unsigned int length = 0;
 	unsigned int theNumberOfThings = 0;
 	int currentSpot = 0;
-	node<T>** itemArr;
+	T* itemArr;
 protected:
 	int hash(std::string str);
+	std::hash<std::string> hasher;
 public:
 	table(unsigned int length = 100);
 	~table();
-	void addItem(T* item);
-	T removeItem(T item);
-	T* getItem(T item);
+	void insert(T item);
+	T remove(T item);
+	T* get(T item);
 	unsigned int getLength() { return this->length; }
 	unsigned int getTheNumberOfThingsForRicky() { return this->theNumberOfThings; }
 	unsigned int getTheCurrentSpotForRicky() { return this->currentSpot; }
@@ -28,17 +28,16 @@ public:
 template<class T>
 inline int table<T>::hash(std::string str)
 {
-	int i = 0;
-	for (int i = 0; i < str.size(); i++)
-		i += str[i];
-
-	return i;
+	std::hash<std::string> hasher;
+	return (int)hasher(str);
 }
 
 template<class T>
 inline table<T>::table(unsigned int length) {
-	this->itemArr = new node<T>*[length];
+	this->itemArr = new T[length];
 	this->length = length;
+	for (int i = 0; i < length; i++)
+		this->itemArr[i] = (T)INT_MIN;
 }
 
 template<class T>
@@ -47,49 +46,51 @@ inline table<T>::~table() {
 }
 
 template<class T>
-inline void table<T>::addItem(T* item) {
-	int index = hash(std::string(*item)) % this->length;
+inline void table<T>::insert(T item) {
+	if (this->theNumberOfThings >= this->length)
+		throw "The table is full.";
 
-	node<T>* inval = new node<T>{
-		item,
-		false
-	};
+	int index = (unsigned int)this->hasher(item) % this->length;
 
-	if (itemArr[index] == nullptr) {
-		itemArr[index] = inval;
+	if (itemArr[index] == (T)INT_MIN) {
+		itemArr[index] = item;
 	}
 	else {
-		while (itemArr[index] != nullptr) {
-			index = (index++) % this->length;
-		}
-		itemArr[index] = inval;
+		while (!(itemArr[index] == (T)INT_MIN))
+			++index %= this->length;
+		itemArr[index] = item;
 	}
+	this->theNumberOfThings++;
 }
 
 template<class T>
-inline T table<T>::removeItem(T item)
+inline T table<T>::remove(T item)
 {
+	if (!this->theNumberOfThings)
+		throw "The table is empty.";
 	int spot = hash(item);
-    while (itemArr[spot] != nullptr && *(itemArr[spot]->value) != item) {
-		spot = (spot + 1) % this->length;
-    }
-        //check for not found
-    itemArr[spot].deleted = true;
-    return *(itemArr[spot]->value);
+    while (!(this->itemArr[spot] == (T)INT_MIN) && !(this->itemArr[spot] == item))
+		++spot %= this->length;
+    
+	this->theNumberOfThings--;
+	T ret = this->itemArr[spot];
+    itemArr[spot] = (T)INT_MIN;
+	return ret;
 }
 
 template<class T>
-inline T* table<T>::getItem(T item)
+inline T* table<T>::get(T item)
 {
-	int spot = hash(item);
-    while (itemArr[spot] != nullptr && *(itemArr[spot]->value) != item) {
+	int spot = ((unsigned int)this->hasher(item)) % this->length;
+    while (!(itemArr[spot] == (T)INT_MIN) && !(itemArr[spot] == item)) {
 		this->comparisons++;
-        spot = (spot + 1) % this->length;
-    }
+		++spot %= this->length;
+	}
 
 	this->comparisons++;
-	if (itemArr[spot] == nullptr)
+	if (itemArr[spot] == (T)INT_MIN)
 		return nullptr;
-	else return itemArr[spot]->value; //check for not found
+	else
+		return &itemArr[spot]; //check for not found
 }
 
