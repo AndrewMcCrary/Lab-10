@@ -22,6 +22,9 @@ public:
 	unsigned int getTheNumberOfThingsForRicky() { return this->theNumberOfThings; }
 	unsigned int getTheCurrentSpotForRicky() { return this->currentSpot; }
 	void setTheCurrentSpotForRicky(unsigned int newVal) { currentSpot = newVal; }
+	T getTheCurrentItemForRicky() { return itemArr[currentSpot]; }
+	unsigned int getTheNextSpotForRicky();
+	unsigned int getThePrevSpotForRicky();
 	int comparisons = 0;
 };
 
@@ -92,5 +95,23 @@ inline T* table<T>::get(T item)
 		return nullptr;
 	else
 		return &itemArr[spot]; //check for not found
+}
+
+template<class T>
+inline unsigned int table<T>::getTheNextSpotForRicky()
+{
+	int spot = this->getTheCurrentSpotForRicky() + 1;
+	while (itemArr[spot] == (T)INT_MIN)
+		++spot %= this->length;
+	return spot;
+}
+
+template<class T>
+inline unsigned int table<T>::getThePrevSpotForRicky()
+{
+	int spot = this->getTheCurrentSpotForRicky() - 1;
+	while (itemArr[spot] == (T)INT_MIN)
+		--spot %= this->length;
+	return spot;
 }
 
