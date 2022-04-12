@@ -9,10 +9,13 @@ public:
 	chainedTable();
 	~chainedTable();
 	unsigned int getLength() { return this->itemArr.Size(); }
-	unsigned int getTheNumberOfThingsForRicky() { return this->itemArr.Size(); }
+	unsigned int getTheNumberOfThingsForRicky() { return this->itemArr->Size(); }
 	void insert(T item);
 	T remove(T item);
 	T* get(T item);
+	T* next() { return itemArr->SeeNext(); }
+	T* prev() { return itemArr->SeePrev(); }
+	T* peekAt(int var) { return itemArr->SeeAt(var); }
 
 private:
 	DoubleLL<T>* itemArr = new DoubleLL<T>();

@@ -145,7 +145,7 @@ inline T* DoubleLL<T>::SeePrev()
 template<typename T>
 inline T* DoubleLL<T>::SeeAt(int var)
 {
-	if (this->Size() >= var)
+	if (this->Size() <= var)
 		return nullptr;
 
 	Node<T>* temp = this->head;

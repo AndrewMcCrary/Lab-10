@@ -14,8 +14,8 @@ int main(void) {
 	table<Part> hashtable = table<Part>();
 
 	bool connectionTerminated = false;
-	while (!connectionTerminated) {
-		std::cout << "Function Testing Menu\n\n [1] AddItem\n [2] GetItem (removes from list)\n [3] IsInList\n [4] IsEmpty\n" <<
+	/*while (!connectionTerminated) {
+		std::cout << "HashTable Function Testing Menu\n\n [1] AddItem\n [2] GetItem (removes from list)\n [3] IsInList\n [4] IsEmpty\n" <<
 			" [5] Size\n [6] SeeNext\n [7] SeePrev\n [8] SeeAt\n [9] Reset\n\n";
 		int choice = 0;
 		std::cin >> choice;
@@ -126,13 +126,17 @@ int main(void) {
 		std::cout << "\nContinue? [0 = yes/1 = no]: ";
 		std::cin >> connectionTerminated;
 	
-	}	
+	}*/	
 
-	
+	chainedTable<Part> chaintable;
+
+	chaintable.insert(Part(1));
+	chaintable.insert(Part(3));
+	chaintable.insert(Part(5));
 
 	connectionTerminated = false;
 	while (!connectionTerminated) {
-		std::cout << "Function Testing Menu\n\n [1] AddItem\n [2] GetItem (removes from list)\n [3] IsInList\n [4] IsEmpty\n" <<
+		std::cout << "ChainedTable Function Testing Menu\n\n [1] AddItem\n [2] GetItem (removes from list)\n [3] IsInList\n [4] IsEmpty\n" <<
 			" [5] Size\n [6] SeeNext\n [7] SeePrev\n [8] SeeAt\n [9] Reset\n\n";
 		int choice = 0;
 		std::cin >> choice;
@@ -163,7 +167,7 @@ int main(void) {
 
 				if (!correct) {
 					Part party = Part(sku, description, price, units, quantity, leadTime);
-					hashtable.insert(party);
+					chaintable.insert(party);
 				}
 			}
 			break;
@@ -176,12 +180,12 @@ int main(void) {
 				std::cout << "\nYou entered: " << sku << ". Is this correct? [0]: yes / [1]: no | ";
 				std::cin >> correct;
 				if (!correct) {
-					if (hashtable.get(Part(sku, "0", 0, "0")) == nullptr) {
+					if (chaintable.get(Part(sku, "0", 0, "0")) == nullptr) {
 						std::cout << "\nItem may not be in hash table\n";
 					}
 					else {
-						hashtable.get(Part(sku, "0", 0, "0"))->asciiART();
-						hashtable.remove(*(hashtable.get(Part(sku))));
+						chaintable.get(Part(sku, "0", 0, "0"))->asciiART();
+						chaintable.remove(*(chaintable.get(Part(sku))));
 					}
 				}
 			}
@@ -190,7 +194,7 @@ int main(void) {
 			int sku;
 			std::cout << "\nYou selected [3] IsInList. Please provide a Stock Keeping Number (SKU): ";
 			std::cin >> sku;
-			if (hashtable.get(Part(sku)) == nullptr) {
+			if (chaintable.get(Part(sku)) == nullptr) {
 				std::cout << sku << " is NOT in list." << endl;
 			}
 			else {
@@ -199,7 +203,7 @@ int main(void) {
 			break;
 		case 4:
 			std::cout << "\nYou selected [4] IsEmpty." << endl;
-			if (hashtable.getTheNumberOfThingsForRicky() != 0) {
+			if (chaintable.getTheNumberOfThingsForRicky() != 0) {
 				std::cout << "List is NOT empty." << endl;
 			}
 			else {
@@ -207,31 +211,30 @@ int main(void) {
 			}
 			break;
 		case 5:
-			std::cout << "\nYou selected [5] Size. | Size is: " << hashtable.getTheNumberOfThingsForRicky() << endl;
+			std::cout << "\nYou selected [5] Size. | Size is: " << chaintable.getTheNumberOfThingsForRicky() << endl;
 			break;
 		case 6:
 			std::cout << "\nYou selected [6] SeeNext. | \n";
-			hashtable.setTheCurrentSpotForRicky(hashtable.getTheNextSpotForRicky());
-			hashtable.getTheCurrentItemForRicky().asciiART();
+			chaintable.next()->asciiART();
 			break;
 		case 7:
 			std::cout << "\nYou selected [7] SeePrev. | \n";
-			hashtable.setTheCurrentSpotForRicky(hashtable.getThePrevSpotForRicky());
-			hashtable.getTheCurrentItemForRicky().asciiART();
+			chaintable.prev()->asciiART();
 			break;
 		case 8:
 			int viewIndex;
 			std::cout << "\nYou selected [8] SeeAt. Please provide an index to view: ";
 			std::cin >> viewIndex;
-			hashtable.setTheCurrentSpotForRicky(viewIndex);
-			hashtable.getTheCurrentItemForRicky().asciiART();
+			if (chaintable.peekAt(viewIndex) != nullptr)
+				chaintable.peekAt(viewIndex)->asciiART();
+			else cout << "No item at that index\n";
 			break;
 		case 9:
 			while (correct) {
-				std::cout << "\nYou selected [9] Reset. Are you sure? [0]: yes / [1]: no";
+				std::cout << "\nYou selected [9] Reset. Are you sure? [0]: yes / [1]: no ";
 				std::cin >> correct;
 				if (!correct) {
-					hashtable = table<Part>();
+					chaintable = chainedTable<Part>();
 				}
 			}
 			break;
