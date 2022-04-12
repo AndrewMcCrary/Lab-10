@@ -1,10 +1,10 @@
 #pragma once
-#include "table.h"
-#include "part.h"
 #include <string>
 #include <iostream>
 #include <vector>
 #include <random>
+#include "table.h"
+#include "part.h"
 #include "chainedTable.h"
 
 using namespace std;
@@ -202,7 +202,7 @@ using namespace std;
 //}
 
 
-int main(void) {
+int main(void) { // This is an Andrew thing, not a part of the project
 	for (int j = 100; j <= 10000; j += 100) {
 		vector<int> parts;
 
