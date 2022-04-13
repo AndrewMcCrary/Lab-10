@@ -9,7 +9,7 @@
 
 using namespace std;
 
-int main(void) {
+int fmain(void) {
 
 	table<Part> hashtable = table<Part>();
 
@@ -247,73 +247,72 @@ int main(void) {
 }
 
 
-//int aasdfgainf(void) {
-//	vector<Part> parts;
-//
-//	// Used uniform int distribution rather than rand
-//	random_device dev;
-//	mt19937 rng(dev());
-//	uniform_int_distribution<mt19937::result_type> dist1000(1, 1000);
-//
-//
-//	for (int i = 0; i < 650; i++)
-//		parts.push_back(Part(dist1000(rng)));
-//
-//	cout << "Table	Chained" << endl;
-//	table<Part> t1;
-//	chainedTable<Part> ct1;
-//	for (int i = 0; i < 50; i++) {
-//		t1.insert(parts[i]);
-//		ct1.insert(parts[i]);
-//	}
-//
-//	for (int i = 0; i < 50; i++) {
-//		t1.get(parts[i]);
-//		ct1.get(parts[i]);
-//	}
-//	cout << t1.comparisons << "	" << ct1.comparisons << endl;
-//
-//	table<Part> t2 = table<Part>(150);
-//	chainedTable<Part> ct2;
-//	for (int i = 50; i < 200; i++) {
-//		t2.insert(parts[i]);
-//		ct2.insert(parts[i]);
-//	}
-//
-//	for (int i = 50; i < 200; i++) {
-//		t2.get(parts[i]);
-//		ct2.get(parts[i]);
-//	}
-//	cout << t2.comparisons << "	" << ct2.comparisons << endl;
-//
-//	table<Part> t3 = table<Part>(200);
-//	chainedTable<Part> ct3;
-//	for (int i = 200; i < 400; i++) {
-//		t3.insert(parts[i]);
-//		ct3.insert(parts[i]);
-//	}
-//
-//	for (int i = 200; i < 400; i++) {
-//		t3.get(parts[i]);
-//		ct3.get(parts[i]);
-//	}
-//	cout << t3.comparisons << "	" << ct3.comparisons << endl;
-//
-//	table<Part> t4 = table<Part>(250);
-//	chainedTable<Part> ct4;
-//	for (int i = 400; i < 650; i++) {
-//		t4.insert(parts[i]);
-//		ct4.insert(parts[i]);
-//	}
-//
-//	for (int i = 400; i < 650; i++) {
-//		t4.get(parts[i]);
-//		ct4.get(parts[i]);
-//	}
-//	cout << t4.comparisons << "	" << ct4.comparisons << endl;
-//
-//	return 0;
-//}
+int main(void) {
+	vector<Part> parts;
+
+	// Used uniform int distribution rather than rand
+	random_device dev;
+	mt19937 rng(dev());
+	uniform_int_distribution<mt19937::result_type> dist1000(1, 1000);
+
+	for (int i = 0; i < 650; i++)
+		parts.push_back(Part(dist1000(rng)));
+
+	cout << "Table	Chained" << endl;
+	table<Part> t1;
+	chainedTable<Part> ct1;
+	for (int i = 0; i < 50; i++) {
+		t1.insert(parts[i]);
+		ct1.insert(parts[i]);
+	}
+
+	for (int i = 0; i < 50; i++) {
+		t1.get(parts[i]);
+		ct1.get(parts[i]);
+	}
+	cout << t1.comparisons << "	" << ct1.comparisons << endl;
+
+	table<Part> t2 = table<Part>(150);
+	chainedTable<Part> ct2;
+	for (int i = 50; i < 200; i++) {
+		t2.insert(parts[i]);
+		ct2.insert(parts[i]);
+	}
+
+	for (int i = 50; i < 200; i++) {
+		t2.get(parts[i]);
+		ct2.get(parts[i]);
+	}
+	cout << t2.comparisons << "	" << ct2.comparisons << endl;
+
+	table<Part> t3 = table<Part>(200);
+	chainedTable<Part> ct3;
+	for (int i = 200; i < 400; i++) {
+		t3.insert(parts[i]);
+		ct3.insert(parts[i]);
+	}
+
+	for (int i = 200; i < 400; i++) {
+		t3.get(parts[i]);
+		ct3.get(parts[i]);
+	}
+	cout << t3.comparisons << "	" << ct3.comparisons << endl;
+
+	table<Part> t4 = table<Part>(250);
+	chainedTable<Part> ct4;
+	for (int i = 400; i < 650; i++) {
+		t4.insert(parts[i]);
+		ct4.insert(parts[i]);
+	}
+
+	for (int i = 400; i < 650; i++) {
+		t4.get(parts[i]);
+		ct4.get(parts[i]);
+	}
+	cout << t4.comparisons << "	" << ct4.comparisons << endl;
+
+	return 0;
+}
 
 
 //int main(void) { // This is an Andrew thing, not a part of the project
