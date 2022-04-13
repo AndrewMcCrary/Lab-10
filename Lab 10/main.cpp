@@ -14,7 +14,7 @@ int main(void) {
 	table<Part> hashtable = table<Part>();
 
 	bool connectionTerminated = false;
-	/*while (!connectionTerminated) {
+	while (!connectionTerminated) {
 		std::cout << "HashTable Function Testing Menu\n\n [1] AddItem\n [2] GetItem (removes from list)\n [3] IsInList\n [4] IsEmpty\n" <<
 			" [5] Size\n [6] SeeNext\n [7] SeePrev\n [8] SeeAt\n [9] Reset\n\n";
 		int choice = 0;
@@ -126,13 +126,9 @@ int main(void) {
 		std::cout << "\nContinue? [0 = yes/1 = no]: ";
 		std::cin >> connectionTerminated;
 	
-	}*/	
+	}	
 
 	chainedTable<Part> chaintable;
-
-	chaintable.insert(Part(1));
-	chaintable.insert(Part(3));
-	chaintable.insert(Part(5));
 
 	connectionTerminated = false;
 	while (!connectionTerminated) {
@@ -180,11 +176,11 @@ int main(void) {
 				std::cout << "\nYou entered: " << sku << ". Is this correct? [0]: yes / [1]: no | ";
 				std::cin >> correct;
 				if (!correct) {
-					if (chaintable.get(Part(sku, "0", 0, "0")) == nullptr) {
+					if (chaintable.get(Part(sku)) == nullptr) {
 						std::cout << "\nItem may not be in hash table\n";
 					}
 					else {
-						chaintable.get(Part(sku, "0", 0, "0"))->asciiART();
+						chaintable.get(Part(sku))->asciiART();
 						chaintable.remove(*(chaintable.get(Part(sku))));
 					}
 				}
