@@ -71,7 +71,7 @@ inline T table<T>::remove(T item)
 {
 	if (!this->theNumberOfThings)
 		throw "The table is empty.";
-	int spot = hash(item);
+	int spot = hash(item)%this->length;
     while (!(this->itemArr[spot] == (T)INT_MIN) && !(this->itemArr[spot] == item))
 		++spot %= this->length;
     
