@@ -247,7 +247,7 @@ int fmain(void) {
 }
 
 
-int main(void) {
+int afmain(void) {
 	vector<Part> parts;
 
 	// Used uniform int distribution rather than rand
@@ -315,34 +315,41 @@ int main(void) {
 }
 
 
-//int main(void) { // This is an Andrew thing, not a part of the project
-//	for (int j = 100; j <= 10000; j += 100) {
-//		vector<int> parts;
-//
-//		// Used uniform int distribution rather than rand
-//		//random_device dev;
-//		//mt19937 rng(dev());
-//		//uniform_int_distribution<mt19937::result_type> dist1000(1, 10000);
-//		srand(time(NULL));
-//		int comparisons = 0;
-//		int max = 50;
-//		for (int a = 0; a < max; a++) {
-//			for (int i = 0; i < j; i++)
-//				parts.push_back((rand() % 10000) + 1);
-//
-//			table<Part> t1 = table<Part>(j);
-//			for (int i = 0; i < j; i++) {
-//				t1.insert(parts[i]);
-//			}
-//
-//			for (int i = 0; i < j; i++) {
-//				t1.get(parts[i]);
-//			}
-//			comparisons += t1.comparisons;
-//			parts.clear();
-//		}
-//		cout << comparisons / (float)j / (float)max << endl;
-//	}
-//
-//	return 0;
-//}
+int main(void) { // This is an Andrew thing, not a part of the project
+
+	vector<int> numbers;
+
+	for (int i = 0; i <= 10000; i++)
+		numbers.push_back(i);
+
+	for (int j = 100; j <= 10000; j += 100) {
+		vector<int> parts;
+		// Used uniform int distribution rather than rand
+		//random_device dev;
+		//mt19937 rng(dev());
+		//uniform_int_distribution<mt19937::result_type> dist1000(1, 10000);
+
+		int comparisons = 0;
+		int max = 100;
+		for (int a = 0; a < max; a++) {
+			shuffle(numbers.begin(), numbers.end(), std::default_random_engine(time(NULL)));
+
+			for (int i = 0; i < j; i++)
+				parts.push_back(numbers[i]);
+
+			table<Part> t1 = table<Part>(j);
+			for (int i = 0; i < j; i++) {
+				t1.insert(parts[i]);
+			}
+
+			for (int i = 0; i < j; i++) {
+				t1.get(parts[i]);
+			}
+			comparisons += t1.comparisons;
+			parts.clear();
+		}
+		cout << comparisons / (float)j / (float)max << endl;
+	}
+
+	return 0;
+}

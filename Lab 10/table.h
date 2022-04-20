@@ -56,11 +56,14 @@ inline void table<T>::insert(T item) {
 	int index = (unsigned int)this->hasher(item) % this->length;
 
 	if (itemArr[index] == (T)INT_MIN) {
+		this->comparisons++;
 		itemArr[index] = item;
 	}
 	else {
-		while (!(itemArr[index] == (T)INT_MIN))
+		while (!(itemArr[index] == (T)INT_MIN)) {
+			this->comparisons++;
 			++index %= this->length;
+		}
 		itemArr[index] = item;
 	}
 	this->theNumberOfThings++;
@@ -86,11 +89,11 @@ inline T* table<T>::get(T item)
 {
 	int spot = ((unsigned int)this->hasher(item)) % this->length;
     while (!(itemArr[spot] == (T)INT_MIN) && !(itemArr[spot] == item)) {
-		this->comparisons++;
+		//this->comparisons++;
 		++spot %= this->length;
 	}
 
-	this->comparisons++;
+	//this->comparisons++;
 	if (itemArr[spot] == (T)INT_MIN)
 		return nullptr;
 	else
